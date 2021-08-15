@@ -284,5 +284,5 @@ yarn-error.log*
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+# *.sln
 *.sw*
