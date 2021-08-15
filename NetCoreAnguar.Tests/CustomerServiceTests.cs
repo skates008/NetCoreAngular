@@ -123,7 +123,7 @@ namespace NetCoreAnguar.Tests
         public void Add_ValidObjectPassed_ReturnedResponseHasCreatedItem()
         {
             // Arrange
-            var testItem = new Customer()
+            var testItem = new CustomerViewModel()
             {
                 Name = "Guinness Original 6 Pack",
                 Address = "Guinness",
@@ -131,8 +131,8 @@ namespace NetCoreAnguar.Tests
             };
 
             // Act
-            var createdResponse = _controller.Post(testItem) as CreatedAtActionResult;
-            var item = createdResponse.Value as Customer;
+            var createdResponse = _controller.Create(testItem).Result as OkObjectResult;
+            var item = createdResponse.Value as CustomerViewModel;
 
             // Assert
             Assert.IsType<Customer>(item);
