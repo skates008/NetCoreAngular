@@ -1,0 +1,56 @@
+
+<div class="row justify-content-center">
+  <div class="col-8 mt-4">
+    <h4>{{(isEditMode) ? 'Edit' : 'Add'}} Customer</h4>
+    <form [formGroup]="customerForm" >
+      <div class="form-group">
+        <label for="customer_name">Customer Name</label>
+        <input type="text"
+               formControlName="name"
+               required
+               name="name"
+               class="form-control"
+               id="name"
+               placeholder="Name">
+      </div>
+      <div class="mb-3 form-group">
+        <label for="customer_salary">Address</label>
+        <textarea class="form-control"
+                  formControlName="address"
+                  name="address"
+                  class="form-control"
+                  id="address"
+                  placeholder="Address"></textarea>
+      </div>
+       
+      <div class="form-group">
+        <label for="customer_name">Phone</label>
+        <input type="text"
+               formControlName="phone"
+               required
+               name="phone"
+               class="form-control"
+               id="phone"
+               placeholder="Phone">
+      </div>
+      <div class="form-group">
+        <label for="customer_name">Email</label>
+        <input type="email"
+               formControlName="email"
+               required
+               name="email"
+               class="form-control"
+               id="email"
+               placeholder="Email">
+      </div>
+      <button class="btn btn-primary m-1"
+              [routerLink]="['/customer']"><i class="fas fa-arrow-left"></i> Back To List</button>
+      <button class="btn btn-success m-1"
+              type="button"
+              [disabled]="!customerForm.valid"
+              (click)="onSubmit()"
+             >{{(isEditMode) ? 'Edit' : 'Add'}}  <i class="fas fa-plus"></i></button>
+    </form>
+
+  </div>
+</div>

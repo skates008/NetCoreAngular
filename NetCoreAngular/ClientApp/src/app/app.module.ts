@@ -3,34 +3,33 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {StoreModule} from '@ngrx/store';
-import {StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import {EffectsModule} from '@ngrx/effects';
-import {HttpClientModule} from '@angular/common/http';
-import {
-  StoreRouterConnectingModule,
-  routerReducer,
-  RouterStateSerializer
-} from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app-effects.effects';
+import { HomeComponent } from './pages/home/home.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    NavbarComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({
-      router: routerReducer
-    }),
-    StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
-    StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([]),
+    AppRoutingModule,
     HttpClientModule,
-    AppRoutingModule
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictActionImmutability:true,
+        strictStateImmutability: true
+      }
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

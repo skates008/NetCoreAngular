@@ -23,9 +23,9 @@ namespace NetCoreAngular.Service
 
             var repo = _genericUnitOfWork.GetRepository<Customer, string>();
 
-            var emailExists = await repo.Exists(c => c.Email == model.Email.Trim());
-            if (emailExists)
-                throw new ArgumentException("customer with the email already exists in the system");
+            //var emailExists = await repo.Exists(c => c.Email == model.Email.Trim());
+            //if (emailExists)
+            //    throw new ArgumentException("customer with the email already exists in the system");
 
 
             var customer = new Customer();
@@ -34,7 +34,9 @@ namespace NetCoreAngular.Service
             customer.Email = model.Email;
             customer.Address = model.Address;
             customer.Website = model.Website;
+            customer.Phone = model.Phone;
             customer.CreatedDate = DateTime.UtcNow;
+            
 
             repo.Add(customer);
 
@@ -68,10 +70,10 @@ namespace NetCoreAngular.Service
                 Name = c.Name,
                 Address = c.Address,
                 Email = c.Email,
-                Website = c.Website
+                Website = c.Website,
+                Phone = c.Phone
 
-
-            }).ToList();
+        }).ToList();
             return result;
 
 
@@ -96,7 +98,8 @@ namespace NetCoreAngular.Service
                 Name = customer.Name,
                 Address = customer.Address,
                 Email = customer.Email,
-                Website = customer.Website
+                Website = customer.Website,
+                Phone= customer.Phone
 
 
             };
@@ -112,6 +115,7 @@ namespace NetCoreAngular.Service
                 throw new ArgumentException("Customer does not exist");
             
             customer.Name = model.Name;
+            customer.Phone = model.Phone;
             customer.Email = model.Email;
             customer.Address = model.Address;
             customer.Website = model.Website;

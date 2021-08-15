@@ -1,0 +1,33 @@
+<button class="btn btn-primary" style="float: right;" [routerLink]="['/customer/add']">CREATE CUSTOMER</button>
+<br/>
+<div *ngIf="(customers$ | async) as customers">
+  <h3>Customers</h3>
+  <table class="table table-hover">
+    <thead>
+    <tr class="table-primary">  
+      <th scope="col">NAME</th>
+      <th scope="col">ADDRESS</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">PHONE</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tr *ngFor="let customer of (customers$ | async)"> 
+      <td>{{customer.name}}</td>
+      <td>{{customer.address}}</td>
+      <td>{{customer.email}}</td>
+      <td>{{customer.phone}}</td>
+      <th>
+        <button type="button"
+                [routerLink]="['/customer/edit', customer.id ]"
+                class="btn btn-warning">Edit</button>
+        <button type="button" (click)=deleteCustomer(customer) class="btn btn-danger">Delete</button>
+      </th>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
